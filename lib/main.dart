@@ -1,18 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:github_search/cache/github_cache.dart';
+import 'package:github_search/data/github_client.dart';
+import 'package:github_search/repository/github_repository.dart';
+import 'package:github_search/ui/search_form.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  final GithubRepository _githubRepository = GithubRepository(
+    GithubCache(),
+    GithubClient(),
+  );
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  runApp(App(githubRepository: _githubRepository));
+}
+
+class App extends StatelessWidget {
+  final GithubRepository githubRepository;
+
+  const App({
+    Key key,
+    @required this.githubRepository,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-       
-        primarySwatch: Colors.blue,
+      title: 'Github Search',
+      home: Scaffold(
+        appBar: AppBar(title: Text('Github Search')),
+        body: SearchForm(
+          githubRepository: githubRepository,
+        ),
       ),
-      home: Container(),
     );
   }
 }
