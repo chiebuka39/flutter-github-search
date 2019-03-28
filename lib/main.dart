@@ -30,7 +30,7 @@ class App extends StatelessWidget {
           appBar: AppBar(
             title: Text('Github Search'),
             actions: <Widget>[
-              SearchButton()
+              SearchButton(githubRepository: githubRepository)
             ],
           ),
           body: Center(

@@ -6,6 +6,7 @@ import 'package:github_search/events/github_search_event.dart';
 import 'package:github_search/models/search_result_item.dart';
 import 'package:github_search/repository/github_repository.dart';
 import 'package:github_search/states/github_search_states.dart';
+import 'package:github_search/ui/search_results.dart';
 
 
 class SearchForm extends StatefulWidget {
@@ -115,7 +116,7 @@ class _SearchBody extends StatelessWidget {
         if (state is SearchStateSuccess) {
           return state.items.isEmpty
               ? Text('No Results')
-              : Expanded(child: _SearchResults(items: state.items));
+              : Expanded(child: SearchResults(items: state.items));
         }
       },
     );
@@ -123,38 +124,3 @@ class _SearchBody extends StatelessWidget {
 }
 
 
-class _SearchResults extends StatelessWidget {
-  final List<SearchResultItem> items;
-
-  const _SearchResults({Key key, this.items}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (BuildContext context, int index) {
-        return _SearchResultItem(item: items[index]);
-      },
-    );
-  }
-}
-
-
-class _SearchResultItem extends StatelessWidget {
-  final SearchResultItem item;
-
-  const _SearchResultItem({Key key, @required this.item}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        child: Image.network(item.owner.avatarUrl),
-      ),
-      title: Text(item.fullName),
-      onTap: () {
-       print(item.fullName);
-      },
-    );
-  }
-}
