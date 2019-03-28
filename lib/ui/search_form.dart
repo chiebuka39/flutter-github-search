@@ -6,7 +6,7 @@ import 'package:github_search/events/github_search_event.dart';
 import 'package:github_search/models/search_result_item.dart';
 import 'package:github_search/repository/github_repository.dart';
 import 'package:github_search/states/github_search_states.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 class SearchForm extends StatefulWidget {
   final GithubRepository githubRepository;
@@ -152,10 +152,8 @@ class _SearchResultItem extends StatelessWidget {
         child: Image.network(item.owner.avatarUrl),
       ),
       title: Text(item.fullName),
-      onTap: () async {
-        if (await canLaunch(item.htmlUrl)) {
-          await launch(item.htmlUrl);
-        }
+      onTap: () {
+       print(item.fullName);
       },
     );
   }

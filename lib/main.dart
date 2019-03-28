@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:github_search/cache/github_cache.dart';
 import 'package:github_search/data/github_client.dart';
 import 'package:github_search/repository/github_repository.dart';
+import 'package:github_search/ui/search_button.dart';
 import 'package:github_search/ui/search_form.dart';
 
 void main() {
@@ -26,11 +27,20 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Github Search',
       home: Scaffold(
-        appBar: AppBar(title: Text('Github Search')),
-        body: SearchForm(
-          githubRepository: githubRepository,
-        ),
-      ),
+          appBar: AppBar(
+            title: Text('Github Search'),
+            actions: <Widget>[
+              SearchButton()
+            ],
+          ),
+          body: Center(
+            child: Text("Github users"),
+          )
+          // SearchForm(
+          //   githubRepository: githubRepository,
+          // ),
+          ),
     );
   }
 }
+
